@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المواعيد المحجوزة للطبيب {{ doctor.name }}</title>
+    <style>
+        /* الألوان والخطوط */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f5a623;
+            margin-bottom: 20px;
+        }
+
+        /* جدول المواعيد */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            table-layout: fixed; /* التحكم بعرض الأعمدة */
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            word-wrap: break-word; /* منع تداخل النصوص */
+        }
+
+        th {
+            background-color: #f5a623;
+            color: #fff;
+            font-size: 1.1em;
+        }
+
+        td {
+            background-color: #fff;
+            color: #333;
+        }
+
+        /* الأزرار */
+        button {
+            background-color: #f5a623;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e49420;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #f5a623;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #e49420;
+        }
+
+        /* تحسين استجابة الجدول للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+            }
+
+            td, th {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            td:before, th:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                font-weight: bold;
+                color: #f5a623;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f5a623;
+                color: #fff;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>المواعيد المحجوزة لدى {{ doctor.name }}</h1>
+
+    {% if appointments %}
+        <table>
+            <thead>
+                <tr>
+                    <th data-label="اسم المريض">اسم المريض</th>
+                    <th data-label="رقم الهاتف">رقم الهاتف</th>
+                    <th data-label="الوصف">الوصف</th>
+                    <th data-label="التاريخ">التاريخ</th>
+                    <th data-label="المعاد">المعاد</th>
+                    <th data-label="اليوم">اليوم</th>
+                    <th data-label="حذف الموعد">حذف الموعد</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td data-label="اسم المريض">{{ appointment.patient_name }}</td>
+                        <td data-label="رقم الهاتف">{{ appointment.patient_phone }}</td>
+                        <td data-label="الوصف">{{ appointment.description }}</td>
+                        <td data-label="التاريخ">{{ appointment.appointment_date.strftime('%d/%m/%Y') }}</td>
+                        <td data-label="المعاد">{{ appointment.appointment_start_time.strftime('%I:%M %p') }} - {{ appointment.appointment_end_time.strftime('%I:%M %p') }}</td>
+                        <td data-label="اليوم">{{ appointment.day }}</td>
+                        <td data-label="حذف الموعد">
+                            <form action="{{ url_for('delete_appointment', appointment_id=appointment.id) }}" method="POST">
+                                <button type="submit">حذف</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>لا توجد مواعيد محجوزة حالياً.</p>
+    {% endif %}
+
+    <a href="{{ url_for('book', doctor_id=doctor.id) }}">العودة إلى صفحة الحجز</a>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز موعد</title>
+    <style>
+        body {
+            direction: rtl;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: right;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .alert {
+            color: rgb(133, 222, 77);
+            font-weight: bold;
+        }
+        label {
+            font-size: 16px;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #ffcc00;
+            box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #ffcc00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #e6b800;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* تصميم قائمة المواعيد */
+        .appointments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .appointment-card {
+            flex: 1 1 48%; /* مستطيلين في كل سطر */
+            background-color: #fff;
+            border: 1px solid #ffcc00;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .appointment-card.selected {
+            background-color: #ffcc00;
+            color: white;
+        }
+        .appointment-card.selected .date {
+            color: #333;
+        }
+        .appointment-card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+        .appointment-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .appointment-card .date {
+            font-weight: bold;
+            color: #ffcd05;
+            font-size: 20px;
+        }
+        .appointment-card .day {
+            font-size: 12px;
+            color: #888;
+        }
+        .appointment-card .time-slot {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+        }
+        .appointment-card .duration {
+            color: #555;
+            font-size: 12px;
+        }
+
+        .week-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .week-nav a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .week-nav a:hover {
+            color: #e6b800;
+        }
+
+        /* تصميم استجابة */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .btn {
+                width: 50%;
+            }
+            .week-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .week-nav a {
+                margin: 5px 0;
+            }
+            .appointment-card {
+                flex: 1 1 100%; /* البطاقة تأخذ العرض الكامل في الشاشات الصغيرة */
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+        }
+        .appointment-card {
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .appointment-card:hover {
+            background-color: #e9e9e9;
+        }
+        .toggle-arrow {
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>حجز موعد لدى {{ doctor.name }}</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="alert">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('book', doctor_id=doctor.id, week=week_offset) }}" method="POST">
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">رقم الهاتف:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="description">الوصف:</label>
+            <textarea id="description" name="description"></textarea>
+            <input type="hidden" id="time_day" name="time_day" value="">
+
+            <label for="time_day">اختر موعد:</label><br>
+            <span class="toggle-arrow" onclick="toggleModal()">&#9650; اختيار الموعد</span>
+            <div id="appointmentModal" class="modal">
+                <div class="modal-content">
+                    <span class="toggle-arrow" onclick="toggleModal()" style="float: right;">&#9664; إغلاق</span>
+                    <h2>المواعيد المتاحة</h2>
+                    <div id="appointmentsList">
+                        {% for slot in available_slots %}
+                        <div class="appointment-card" onclick="selectAppointment(this, '{{ slot['day'] }}|{{ slot['start_time'] }}|{{ slot['end_time'] }}|{{ slot['full_time_slot'] }}')">
+                            <p class="date">{{ slot['day'] }}</p>
+                            <p class="time-slot">TIME: {{ slot['start_time'] }} - {{ slot['end_time'] }} </p>
+                            <p class="time-slot">{{ slot['ull_time_slot'] }}</p>
+                            <p class="duration">({{ slot['duration'] }})</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button type="submit" class="btn">احجز</button>
+                <a href="{{ url_for('book', doctor_id=doctor.id, week=week_offset - 1) }}" {% if week_offset <= 0 %}style="visibility: hidden;"{% endif %} class="btn">
+                    الأسبوع السابق
+                </a>
+                <a href="{{ url_for('book', doctor_id=doctor.id, week=week_offset + 1) }}" class="btn">
+                    الأسبوع القادم
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleModal() {
+            var modal = document.getElementById("appointmentModal");
+            modal.style.display = modal.style.display === "block" ? "none" : "block";
+        }
+
+        function selectAppointment(element, value) {
+            // إزالة التحديد من كل البطاقات الأخرى
+            const cards = document.querySelectorAll('.appointment-card');
+            cards.forEach(card => card.classList.remove('selected'));
+
+            // إضافة التحديد للبطاقة التي تم النقر عليها
+            element.classList.add('selected');
+
+            // تعيين القيمة في الحقل المخفي
+            document.getElementById('time_day').value = value;
+        }
+
+        // لإغلاق النافذة المنبثقة عند النقر خارجها
+        window.onclick = function(event) {
+            var modal = document.getElementById("appointmentModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>

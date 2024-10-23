@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap">
+    <title>قسم علاج الإدمان</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            font-family:'Cairo', sans-serif;
+            color: #333;
+            text-align: center;
+        }
+       /* تنسيق الناف بار */
+       .navbar {
+              display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color:   #E0E0E0;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(218, 200, 200, 0.1);
+            position: relative;
+            color:  #000000;
+            font-size: 22px;
+        }
+
+        .navbar img {
+            width: 80px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color:  #2C3E50;
+            font-size: 18px;
+            padding: 8px 12px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #FFC107;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        /* تصميم القائمة المنسدلة */
+        .navbar ul li .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #606465;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul li .dropdown a {
+            display: block;
+            padding: 10px 15px;
+            text-align: right;
+            color: #ffffff;
+        }
+
+        .navbar ul li:hover .dropdown {
+            display: block;
+        }
+
+        /* تصميم الهامبرغر */
+        .navbar .menu-button {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* تنسيق النص في منتصف الناف بار */
+        .navbar .center-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .navbar .center-text h1 {
+            margin: 0;
+            font-size: 31px;
+            font-weight: bold;
+            color: #ffc400;
+        }
+
+        /* استعلامات الوسائط لتصميم متجاوب */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .navbar img {
+                width: 70px;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+
+            .navbar .menu-button {
+                display: block;
+            }
+
+            .navbar .center-text {
+                position: static;
+                transform: none;
+                text-align: center;
+            }
+
+            .navbar .center-text h1 {
+                font-size: 26px;
+            }
+
+            .navbar .menu-items.active {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar img {
+                width: 65px;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+
+            .navbar .menu-button {
+                display: block;
+            }
+
+            .navbar .center-text {
+                position: static;
+                transform: none;
+                text-align: center;
+            }
+
+            .navbar .center-text h1 {
+                font-size: 30px;
+            }
+
+            .navbar .menu-items.active {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* تنسيق القائمة المنسدلة للشاشات الصغيرة */
+            .menu-items {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                background-color: #FFC107;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 1;
+            }
+
+            .menu-items li {
+                width: 100%;
+                text-align: right;
+            }
+
+            .menu-items li a {
+                display: block;
+                padding: 10px 20px;
+                color: #fff;
+                width: 100%;
+                text-align: right;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .menu-items li a:hover {
+                background-color: #E0F7FA;
+                color: #333;
+            }
+        }
+
+        h1 {
+            color: #dca605;
+            margin-top: 30px;
+            font-size: 36px;
+        }
+        .doctor-card {
+    background-color: #011417;
+    border: 2px solid #FFC107;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    text-align: center;
+    color: #fff;
+}
+
+.doctor-card img {
+    width: 120px;  /* عرض الصورة الدائرية */
+    height: 120px;  /* الارتفاع يساوي العرض للحصول على صورة دائرية */
+    border-radius: 50%;  /* جعل الصورة دائرية */
+    border: 2px solid #FFC107;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;  /* إضافة انتقال سلس */
+}
+
+
+.doctor-card h3 {
+    color: #FFC107;
+    margin: 5px 0;
+    font-size: 22px;
+}
+
+.doctor-card p {
+    color: #ddd;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.doctor-card .details-box {
+    background-color: rgba(255, 255, 255, 0.1); /* لون ضبابي */
+    border: 1px solid #FFC107;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 15px 0; /* زيادة المسافة بين المربعات */
+    text-align: left;
+    color: #fff;
+}
+
+.details-box .phone {
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.details-box .session-prices {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.details-box .session-prices i {
+    margin-right: 8px;
+}
+
+.doctor-card .specialty {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 15px; /* زيادة المسافة بين المعلومات */
+}
+
+.doctor-card .more-info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.more-info-container .info-box {
+    background-color: #1cfbdd38;
+    color: #28ddf9b6;
+    padding: 8px;  /* تقليل الحشو لتصغير الحجم */
+    border-radius: 5px;
+    width: 48%;  /* الحفاظ على عرض متساوي */
+    text-align: center;
+    font-size: 14px;  /* تقليل حجم الخط */
+}
+.more-info-container .info-box:hover {
+    background-color: #00ffe1;
+    color: #000000;
+    
+    
+}
+
+.doctor-card .book-button {
+    background-color: #FFC107;
+    color: #011417;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+.doctor-card .more-info {
+    display: block;
+    color: #007BFF;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.doctor-cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next row */
+    justify-content: center; /* Center the cards horizontally */
+    gap: 20px; /* Space between cards */
+}
+
+.doctor-card {
+    flex: 1 1 calc(33.33% - 40px); /* Set width to take up 1/3 of the row, minus some space for gap */
+    box-sizing: border-box; /* Ensure padding and borders are included in the width */
+    max-width: 350px; /* Optional: Max width to prevent very wide cards on large screens */
+}
+
+@media (max-width: 1000px) {
+    .doctor-card {
+        flex: 1 1 calc(50% - 40px); /* Two cards per row on medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .doctor-card {
+        flex: 1 1 100%; /* One card per row on small screens */
+    }
+}
+/* Description text for the treatment section */
+p {
+    font-size: 16px; /* Default font size for small screens */
+    color: #333;
+    margin: 20px;
+}
+
+
+/* Increase font size on larger screens */
+@media (min-width: 768px) {
+    p {
+        font-size: 24px; /* Larger font size for larger screens */
+    }
+    
+}
+
+
+#treatment-content h1 {
+        font-size: 40px; /* تكبير حجم الخط */
+        color: #FFC107; /* لون ذهبي */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص */
+        transition: transform 0.3s ease; /* تأثير ديناميكي */
+    }
+
+    #treatment-content h1:hover {
+        transform: scale(1.05); /* تكبير عند التمرير */
+    }
+
+    #treatment-content .description {
+        font-size: 20px; /* زيادة حجم الخط */
+        color: #333; /* لون غامق */
+        margin-top: 10px;
+        line-height: 1.5; /* تحسين تباعد الأسطر */
+        transition: color 0.3s; /* تأثير على اللون */
+    }
+    .doctor-cards-container {
+        display: flex;
+        flex-wrap: wrap; /* للسماح بتوزيع البطاقات في عدة صفوف */
+        justify-content: center; /* توسيط البطاقات */
+        gap: 20px; /* مسافة بين البطاقات */
+    }
+    p:hover {
+        color: #30ff10; /* تغيير اللون عند التمرير */
+    }
+    .more-info:hover {
+        color: #23effa; /* تغيير اللون عند التمرير */
+    }
+    /* إعداد الخلفية الافتراضية */
+.treatment-background {
+    position: relative;
+    padding: 20px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+/* الكود الخاص بالمربع فقط */
+.slid{
+  display: flex;
+  justify-content: center; /* محاذاة أفقية للمربع */
+  margin: 0; /* إزالة المسافات فوق وتحت */
+  font-family: 'Cairo', sans-serif;
+}
+
+.slider {
+  width:76%;
+  max-width: 420px; /* تصغير العرض */
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color:#ffe30f;
+}
+
+.slides {
+  display: flex;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: 130px; /* تصغير الارتفاع */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px; /* تصغير حجم الخط */
+  font-weight: 700;
+  color: #333;
+}
+
+.dots {
+  text-align: center;
+  margin-top: 15px;
+  background-color: #fffafa;
+}
+
+.dot {
+  height: 10px; /* تصغير حجم النقاط */
+  width: 10px;
+  margin: 0 5px;
+  background-color: #9d9d9d;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot:hover,
+.active {
+  background-color: #fbc02d;
+}
+
+.slider p {
+  margin: 0;
+  font-size: 18px; /* تصغير حجم النص */
+  line-height: 1.4;
+  color: #212121;
+}
+
+.slider i {
+  margin-left: 10px; /* مسافة بين النص والأيقونة */
+  font-size: 40px; /* حجم الأيقونة */
+  color: #ff9800; /* لون الأيقونة */
+}
+.bottom-nav {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    color: #333;
+    text-align: center;
+    padding-bottom: 60px; /* مسافة للقائمة السفلية */
+    
+}
+
+.bottom-nav h1 {
+    color: #ffcc00;
+    font-size: 36px;
+    margin: 20px 0;
+}
+
+.bottom-nav p {
+    color: #666;
+    font-size: 18px;
+}
+
+/* تهيئة القائمة السفلية */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffcc00;
+    color: white;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-top: 3px solid #fff;
+    display: none;
+}
+
+.nav-item {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-item i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-item:hover {
+    background-color: #fff;
+    color: #ffcc00;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+/* إعدادات الهواتف الصغيرة */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+    
+    .nav-item {
+        font-size: 14px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+    }
+    .bottom-nav{
+      display: flex;
+     
+      height: 51px;
+    }
+    
+}
+
+    </style>
+</head>
+<body>
+    <!-- ناف بار -->
+    <nav class="navbar">
+        <img src={{ url_for('static', filename = '16.png' ) }} alt="صورة 16">
+        <div class="center-text">
+            <h1>IC.H.Y</h1>
+           'I can help you'
+            
+        </div>
+            <ul class="menu-items">
+                <li>
+                    <a href="#">أقسام العلاج</a>
+                    <div class="dropdown">
+                        <a href="treatment.html?section=addiction">قسم علاج الادمان</a>
+                        <a href="treatment.html?section=mentalHealth">قسم الاضطرابات النفسية </a>
+                        <a href="treatment.html?section=family">قسم الأرشاد الاسري والزواجي</a>
+                        <a href="treatment.html?section=sup">قسم الدعم النفسي</a>
+                        <a href="treatment.html?section=difficulties">قسم صعوبات التعلم والتخاطب</a>
+                        <a href="treatment.html?section=Autism">قسم التوحد</a>
+                        <a href="treatment.html?section=development">قسم تنمية  المهارات </a>
+                        <a href="treatment.html?section=iq">قسم مقاييس الذكاء</a>
+                        <a href="treatment.html?section=work">قسم قسم الدورات والورش التدريبية</a>
+                    </div>
+                </li>
+                <li><a href="app.html">تواصل معنا</a></li>
+                <li><a href="#">عن الموقع</a></li>
+                <li><a href="/">الصفحة الرئيسية</a></li>
+            </ul>
+        </nav>
+        <div class="bottom-nav">
+            <a href="/" class="nav-item">
+                <i class="fas fa-home"></i>
+                الرئيسية
+            </a>
+            <a href="#about" class="nav-item">
+                <i class="fas fa-info-circle"></i>
+                عن الموقع
+            </a>
+            <a href="/#treatment-sections" class="nav-item">
+                <i class="fas fa-stethoscope"></i>
+                أقسام العلاج
+            </a>
+            <a href="app.html" class="nav-item">
+                <i class="fas fa-envelope"></i>
+                تواصل معنا
+            </a>
+        </div>
+    
+    <div id="treatment-content"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const treatmentSection = urlParams.get('section');
+
+        const treatments = {
+            addiction: {
+                title: "قسم علاج الإدمان",
+                class:"addiction",
+                titleColor: "#FF5733",
+                description: "يقوم معالجينا المتخصصون بتقديم برامج علاجية شاملة تهدف إلى مساعدة الأفراد في التغلب على الإدمان والعودة إلى حياة صحية ومستقرة. نعتمد على أحدث الأساليب العلاجية المعتمدة دوليًا والتي تشمل العلاج النفسي، الرعاية الطبية، والدعم السلوكي. نسعى إلى تهيئة بيئة آمنة وداعمة لكل مريض، مع تقديم خطط علاجية مصممة خصيصًا لتناسب احتياجاته الفردية. فريقنا ملتزم بتقديم الدعم المستمر خلال مراحل العلاج وما بعدها لضمان نجاح رحلة التعافي",
+                descriptio1: "علاج الإدمان هو بداية حياة جديدة",
+                descriptio2:"الشفاء من الإدمان يعيد لك ذاتك المفقودة",
+                descriptio3: "التحرر من الإدمان هو اختيار القوة على الضعف",
+                descriptio4: "الإرادة مع العلاج يفتحان أبواب الأمل",
+                descriptio5: "علاج الإدمان يعيد بناء الإنسان من الداخل",
+
+                descripti1: "fas fa-sync-alt",
+                descripti2:"fas fa-user-alt",
+                descripti3:"fas fa-dumbbell",
+                descripti4: "fas fa-door-open",
+                descripti5: "fas fa-tools",
+                doctors: [
+                    { name: "د.احمد شرف", image: "{{ url_for('static', filename = '2.jpeg' ) }}", title: "أخصائي العلاج النفسي وعلاج الإدمان", phone: "01011505773", priceHalf: "300", priceFull: "400", bio: "علاج الادمان" ,bi: "الطب النفسي", id:"doctor2"  },
+                    { name: "أ.إسلام صبري ", image: "{{ url_for('static', filename = '9.jpeg' ) }}", title: "أخصائي نفسي ",phone: "01201033095-واتس 01155127788  ", priceHalf: "200", priceFull: "350", bio: "علاج نوبات الهلع" ,bi: "علاج الرهاب الاجتماعي", id:"doctor9" },
+                    { name:"أ.اسلام  رمضان", image: "{{ url_for('static', filename = '10.jpeg' ) }}", title: "اخصائي نفسي اكلينكي ومتخصص في الدعم النفسي ", phone: "01228452343-واتس 01112444789", priceHalf: "200", priceFull: "350", bio: "الاكتئاب والرهاب" ,bi: "الوسواس القهري",  id:"doctor10"},
+                   
+                ]
+            },
+            mentalHealth: {
+                class:"mentalHealth",
+                title: "قسم الاضطرابات النفسية",
+                titleColor: "#4A90E2",
+                description: "يقوم معالجينا المتخصصون بتقديم رعاية شاملة وفردية لعلاج مختلف الاضطرابات النفسية، بما في ذلك القلق، الاكتئاب، اضطرابات المزاج، وغيرها. نحن نؤمن بأهمية التوازن النفسي والصحة العقلية في حياة الفرد، لذا نقدم نهجًا علاجياً يعتمد على أحدث الأساليب النفسية والعلاجية المعترف بها عالميًا. نعمل مع المرضى في بيئة داعمة وآمنة، ونقدم برامج علاجية مخصصة لكل حالة، بهدف تحسين جودة الحياة وتعزيز الصحة النفسية على المدى الطويلة",
+                descriptio1: "العلاج يعيد التوازن الداخلي ويعيد بناء العقل",
+                descriptio2: "الشفاء النفسي يفتح أبواب الأمل للحياة الهادئة",
+                descriptio3:"علاج الاضطرابات يعزز مناعة العقل ضد التحديات",
+                descriptio4: "التدخل المبكر في العلاج يحمي من تطور الأمراض النفسية",
+                descriptio5: "الاستقرار النفسي يعيد الإنسان إلى ذاته الحقيقية",
+
+                descripti1: "fas fa-brain",
+                descripti2:"fas fa-heartbeat",
+                descripti3:"fas fa-head-side-virus",
+                descripti4: "fas fa-user-md",
+                descripti5: "fas fa-balance-scale",
+                doctors: [
+                    { name: "د.مريم سمير", image: "{{ url_for('static', filename = '7.jpeg' ) }}", title: "استشاري الصحة النفسية والارشاد الاسري", phone: "01099347308 -واتس 01224588734", priceHalf: "300", priceFull: "500", bio: "اعرف نفسك " ,bi:"اختبارات ومقايس", id:"doctor7"},
+                    { name: "د.احمد شرف", image: "{{ url_for('static', filename = '2.jpeg' ) }}", title: "أخصائي العلاج النفسي وعلاج الإدمان", phone: "01011505773", priceHalf: "300", priceFull: "400", bio: "علاج الادمان" ,bi: "الطب النفسي", id:"doctor2" },
+                    { name: "أ.إسلام صبري ", image: "{{ url_for('static', filename = '9.jpeg' ) }}", title: "أخصائي نفسي ",phone: "01201033095-واتس 01155127788  ", priceHalf: "200", priceFull: "350", bio: "علاج نوبات الهلع" ,bi: "علاج الرهاب الاجتماعي", id:"doctor9" },
+                    { name:"أ.اسلام  رمضان", image: "{{ url_for('static', filename = '10.jpeg' ) }}", title: "اخصائي نفسي اكلينكي ومتخصص في الدعم النفسي ", phone: "01228452343-واتس 01112444789", priceHalf: "200", priceFull: "350", bio: "الاكتئاب والرهاب" ,bi: "الوسواس القهري",  id:"doctor10"},
+                    { name:"أ.مرفت رجب", image: "{{ url_for('static', filename = '13.jpeg' ) }}", title: "اخصائي الصحة النفسية", phone: "01155914445 - واتس 01012245482- واتس0096555097860", priceHalf: "250", priceFull: "400", bio:"الصحة النفسية" ,bi:"ارشاد اسري وتربوي", id:"doctor13"},
+                    { name:"أ.هبه مصطفي فرج", image: "{{ url_for('static', filename = '6.jpeg' ) }}", title: "أخصائي علم نفس اكلينكى/ لايف كوتش معتمد من جامعة عين شمس", phone:"01020403596", priceHalf: "200", priceFull: "250", bio: "دعم نفسي" ,bi:"تشخيص الاضطرابات النفسيه" , id:"doctor6"},
+                    { name:"أ.ريهام عبد النبي", image:"{{ url_for('static', filename = '15.jpeg' ) }}", title: "أخصائي نفسي اڪلينيڪي/أخصائي علاقات زوجية وأسرية", phone:"01094611345", priceHalf: "200", priceFull: "300", bio: "علاج الاضطرابات النفسية " ,bi: "ارشاد اسري و زواجي", id:"doctor15"}, 
+                    { name:"أ.أمل ابراهيم", image:"{{ url_for('static', filename = '8.jpeg' ) }}", title: "اخصائي الصحة النفسية", phone:"01065794444", priceHalf: "", priceFull: "450", bio: "علاج الاعتماديه الغير فطرية",bi: "علاج بالدفع لعاطفي", id:"doctor8"},   
+                    { name: "د.دينا نصرالدين", image: "{{ url_for('static', filename = '11.jpeg' ) }}", title: "إستشاري صحة نفسية وإرشارد أسري", phone: "01091087482", priceHalf: "400", priceFull: "600", bio: "صحة نفسية وارشاد اسري" ,bi:"علاج نفسي مراهقين وراشدين" , id:"doctor11" },  
+                ] 
+            },
+            family: {
+                title: "قسم الارشاد الاسري والزوجي",
+                class:"family",
+                titleColor: "#9B59B6",
+                description:"يقوم معالجونا المتخصصون في الإرشاد الأسري والزوجي بتقديم الدعم النفسي والمشورة للأفراد والأسر، بهدف تعزيز التواصل الصحي وفهم الاحتياجات العاطفية. نساعدك على مواجهة التحديات الزوجية والأسرية بطريقة تعزز العلاقات وتدعم النمو الشخصي. يعمل فريقنا على تزويدك بالأدوات اللازمة للتغلب على الصراعات، تعزيز التفاهم، وبناء علاقات أسرية متينة ومستدامة" ,
+                descriptio1: "العلاج الأسري يعيد ترميم الروابط بين أفراد الأسرة",
+                descriptio2: "الإرشاد الزوجي يبني جسورًا من التفاهم والاحترام المتبادل",
+                descriptio3:"التواصل الفعال بين الأزواج هو أساس العلاقة السليمة",
+                descriptio4: "إرشاد الأسرة يحميها من التفكك ويقوي أسسها",
+                descriptio5: "العائلة الداعمة تخلق بيئة صحية لتربية الأطفال",
+
+                descripti1: "fas fa-handshake",
+                descripti2:"fas fa-users",
+                descripti3:"fas fa-heart",
+                descripti4: "fas fa-comments",
+                descripti5: "fas fa-baby-carriage",
+                doctors: [
+                    { name: "د.مريم سمير", image: "{{ url_for('static', filename = '7.jpeg' ) }}", title: "استشاري الصحة النفسية والارشاد الاسري", phone: "01099347308 -واتس 01224588734", priceHalf: "300", priceFull: "500", bio: "اعرف نفسك " ,bi:"اختبارات ومقايس", id:"doctor7"},
+                    { name: "د.دينا نصرالدين", image: "{{ url_for('static', filename = '11.jpeg' ) }}", title: "إستشاري صحة نفسية وإرشارد أسري", phone: "01091087482", priceHalf: "400", priceFull: "600", bio: "صحة نفسية وارشاد اسري" ,bi:"علاج نفسي مراهقين وراشدين" , id:"doctor11" },  
+                    { name: "أ.إسلام صبري ", image: "{{ url_for('static', filename = '9.jpeg' ) }}", title: "أخصائي نفسي ",phone: "01201033095-واتس 01155127788  ", priceHalf: "200", priceFull: "350", bio: "علاج نوبات الهلع" ,bi: "علاج الرهاب الاجتماعي", id:"doctor9" },
+                    { name:"أ.اسلام  رمضان", image: "{{ url_for('static', filename = '10.jpeg' ) }}", title: "اخصائي نفسي اكلينكي ومتخصص في الدعم النفسي ", phone: "01228452343-واتس 01112444789", priceHalf: "200", priceFull: "350", bio: "الاكتئاب والرهاب" ,bi: "الوسواس القهري",  id:"doctor10"},
+                    { name:"أ.مرفت رجب", image: "{{ url_for('static', filename = '13.jpeg' ) }}", title: "اخصائي الصحة النفسية", phone: "01155914445 - واتس 01012245482- واتس0096555097860", priceHalf: "250", priceFull: "400", bio:"الصحة النفسية" ,bi:"ارشاد اسري وتربوي", id:"doctor13"},
+                    { name:"أ.ريهام عبد النبي", image:"{{ url_for('static', filename = '15.jpeg' ) }}", title: "أخصائي نفسي اڪلينيڪي/أخصائي علاقات زوجية وأسرية", phone:"01094611345", priceHalf: "200", priceFull: "300", bio: "علاج الاضطرابات النفسية " ,bi: "ارشاد اسري و زاوجي", id:"doctor15"}, 
+                    { name:"أ.ميسره عبد الفتاح", image:"{{ url_for('static', filename = '3.jpeg' ) }}", title: "اخصائي ارشاد اسري وعلاقات الزوجية", phone:"01159380181" ,priceHalf: "250", priceFull: "400", bio: "" ,bi: "", id:"doctor3"},     
+                    { name:"أ.محمد شعلان", image:"{{ url_for('static', filename = '12.jpeg' ) }}", title: "أخصائي تعديل سلوك" ,phone:"01221278830-01013666313واتس", priceHalf: "150", priceFull: "250", bio: "", bi: "", id:"doctor12" },
+                ], 
+            },
+            sup: {
+                title: "قسم الدعم النفسي",
+                class:"sup",
+                titleColor: "#2ECC71",
+                description: "يقوم معالجينا في قسم الدعم النفسي بتقديم الرعاية المتخصصة والاحترافية لمساعدتك على تجاوز التحديات النفسية والعاطفية. نحن هنا لنقدم لك بيئة آمنة وسرية، حيث نعمل على توفير الدعم اللازم لتحسين صحتك النفسية وتعزيز قدرتك على مواجهة الضغوطات اليومية. مع فريق من الخبراء المعتمدين، نقدم لك خدمات استشارية تعتمد على أفضل الممارسات العلمية لمساعدتك في تحقيق التوازن النفسي والرفاهية العامة",
+                descriptio1:"الدعم النفسي يساعد على بناء قوة داخلية لا تهتز",
+                descriptio2: "العلاج النفسي يمنح الأمل ويضيء دروب المستقبل",
+                descriptio3:"الدعم العاطفي يخفف من عبء الألم النفسي ويقوي الروح",
+                descriptio4:"الاستشفاء النفسي يعيد بناء الثقة بالنفس ويحفز النمو",
+                descriptio5: "الاسترخاء النفسي هو المفتاح لتحقيق السلام الداخلي",
+
+                descripti1:"fas fa-life-ring",
+                descripti2:"fas fa-smile",
+                descripti3:"fas fa-hands-helping",
+                descripti4: "fas fa-shield-alt",
+                descripti5: "fas fa-spa",
+                doctors: [
+                { name:"أ.اسلام  رمضان", image: "{{ url_for('static', filename = '10.jpeg' ) }}", title: "اخصائي نفسي اكلينكي ومتخصص في الدعم النفسي ", phone: "01228452343-واتس 01112444789", priceHalf: "200", priceFull: "350", bio: "الاكتئاب والرهاب" ,bi: "الوسواس القهري",  id:"doctor10"},
+                { name:"أ.ريهام عبد النبي", image:"{{ url_for('static', filename = '15.jpeg' ) }}", title: "أخصائي نفسي اڪلينيڪي/أخصائي علاقات زوجية وأسرية", phone:"01094611345", priceHalf: "200", priceFull: "300", bio: "علاج الاضطرابات النفسية " ,bi: "ارشاد اسري و زواجي", id:"doctor15"},   
+                { name:"أ.ميسره عبد الفتاح", image:"{{ url_for('static', filename = '3.jpeg' ) }}", title: "اخصائي ارشاد اسري وعلاقات الزوجية", phone:"01159380181" ,priceHalf: "250", priceFull: "400", bio: "",bi:"", id:"doctor3"},     
+                ]    
+            },
+            difficulties: {
+                title: "قسم صعوبات التعلم والتخاطب",
+                class:"difficulties",
+                titleColor: "#F39C12 ",
+                description: "يقوم معالجونا المتخصصون في قسم صعوبات التعلم والتخاطب بتقديم برامج علاجية شاملة تهدف إلى تحسين المهارات اللغوية والقدرات التعليمية للأطفال والبالغين الذين يعانون من تحديات في القراءة، الكتابة، النطق، أو الاستيعاب. نستخدم أحدث التقنيات والأساليب المعتمدة دوليًا في التقييم والتدريب لمساعدة كل فرد على تحقيق أقصى إمكانياته، مع تقديم الدعم المستمر لأولياء الأمور لضمان تحقيق التقدم في بيئة متكاملة",
+                descriptio1:"العلاج المبكر لصعوبات التعلم يمهد الطريق نحو النجاح الأكاديمي",
+                descriptio2: "التدخل في مشكلات التخاطب يفتح أبواب التواصل السليم",
+                descriptio3:"كل طفل يمكنه التعلم بطريقته الخاصة، والعلاج يدعمه",
+                descriptio4:"التغلب على صعوبات التخاطب يحرر الطفل للتعبير عن نفسه",
+                descriptio5: "التعليم المخصص يبني ثقة الطلاب في قدراتهم",
+
+                descripti1:"fas fa-chalkboard-teacher",
+                descripti2:"fas fa-microphone-alt",
+                descripti3:"fas fa-book-reader",
+                descripti4: "fas fa-comments",
+                descripti5: "fas fa-graduation-cap",
+                doctors: [
+                    { name:"د.ماري سمير نشأت", image:"{{ url_for('static', filename = '1.jpg' ) }}", title: "أخصائية تخاطب وتنمية مهارات وصعوبات تعلم", phone: "01289968982", priceHalf: "200", priceFull: "350", bio: "تعديل لدغات", bi: "نمائي واكاديمي", id:"doctor1"},
+                    { name: "أ.مها هشام ", image: "{{ url_for('static', filename = '4.jpeg' ) }}", title: "أخصائي اعاقات", phone: "01008380060", priceHalf: "250", priceFull: "500", bio: "تنمية مهارات", bi:"تعديل سلوك" , id:"doctor4"},
+                    { name: "أ.فيروز حلفاوي", image:"{{ url_for('static', filename = '5.jpeg' ) }}", title: "اخصائي تخاطب وتعديل سلوك وتنمية مهارات", phone: "01282029151-01092057546واتس", priceHalf: "200", priceFull: "300",bio:"تخاطب",bi:"تعديل سلوك", id:"doctor5" },
+                    { name:"أ.محمد شعلان", image:"{{ url_for('static', filename = '12.jpeg' ) }}", title: "أخصائي تعديل سلوك" ,phone:"01221278830-01013666313واتس", priceHalf: "150", priceFull: "250", bio: "", bi: "", id:"doctor12" },
+                    { name:"أ.هدي فتحي", image: "{{ url_for('static', filename = '14.jpeg' ) }}", title: "اخصائية تنمية مهارات وتعديل سلوك ", phone: "01282777145", priceHalf: "200", priceFull: "300", bio:"",bi:"تنميه مهارات "  , id:"doctor14"},
+                ]
+                
+            },
+            Autism: {
+                title: "قسم التوحد",
+                class:"Autism",
+                titleColor: "#2980B9  ",
+                description: "يقوم معالجينا بجلسات تأهيل التوحد  والدوان ببرامج متطورة وتعليم الطفل مهارات الحياة وفن التخاطب وتعديل السلوكيات والانضباط وتعليم قصص الاطفال للتقويم سلوك الطفل والاهتمام بالصحة النفسية الطفل وحبه للتعليم",
+                descriptio1:"التأهيل المبكر للتوحد يفتح آفاقًا جديدة للتعلم والنمو",
+                descriptio2: "تعزيز التواصل الاجتماعي للأطفال المصابين بالتوحد يقوي اندماجهم",
+                descriptio3:"كل طفل مصاب بالتوحد لديه إمكانات فريدة تنتظر الدعم",
+                descriptio4:"دعم العائلات يساعد على تقديم الرعاية الأمثل للأطفال",
+                descriptio5: "التأهيل يعزز استقلالية الطفل ويزيد من ثقته بنفسه",
+                
+                descripti1:"fas fa-puzzle-piece",
+                descripti2:"fas fa-users",
+                descripti3:"fas fa-lightbulb",
+                descripti4: "fas fa-hands-helping",
+                descripti5: "fas fa-walking",
+                doctors: [
+                    { name:"د.ماري سمير نشأت", image:"{{ url_for('static', filename = '1.jpg' ) }}", title: "أخصائية تخاطب وتنمية مهارات وصعوبات تعلم", phone: "01289968982", priceHalf: "200", priceFull: "350", bio: "برامج مختلفة", bi: "تاهيل وتشخيص التوحد", id:"doctor1"},
+                    { name: "أ.مها هشام ", image: "{{ url_for('static', filename = '4.jpeg' ) }}", title: "أخصائي اعاقات", phone: "01008380060", priceHalf: "250", priceFull: "500", bio: "تنمية مهارات", bi:"تعديل سلوك" , id:"doctor4"},
+                    { name: "أ.فيروز حلفاوي", image:"{{ url_for('static', filename = '5.jpeg' ) }}", title: "اخصائي تخاطب وتعديل سلوك وتنمية مهارات", phone: "01282029151-01092057546واتس", priceHalf: "200", priceFull: "300",bio:"تخاطب",bi:"تعديل سلوك", id:"doctor5" },
+                    { name:"أ.محمد شعلان", image:"{{ url_for('static', filename = '12.jpeg' ) }}", title: "أخصائي تعديل سلوك" ,phone:"01221278830-01013666313واتس", priceHalf: "150", priceFull: "250", bio: "", bi: "", id:"doctor12" },
+                    { name:"أ.هدي فتحي", image: "{{ url_for('static', filename = '14.jpeg' ) }}", title: "اخصائية تنمية مهارات وتعديل سلوك ", phone: "01282777145", priceHalf: "200", priceFull: "300", bio: "توحد" ,bi:"تنميه مهارات "  , id:"doctor14"},
+                ]
+                
+            },
+          
+            development: {
+                title: "قسم تنمية المهارات",
+                class:"development",
+                titleColor: "#E67E22",
+                description:"يقوم معالجينا في قسم تنمية المهارات بتقديم الدعم اللازم لمساعدة الأفراد على تطوير قدراتهم الشخصية والمهنية. نعتمد في هذا القسم على أحدث الأساليب التربوية والتقنيات العلاجية لتوجيه الأفراد نحو تحقيق أهدافهم في مجالات مثل التواصل الفعّال، التفكير النقدي، وحل المشكلات. نعمل على تمكين الأفراد من اكتساب المهارات التي تعزز من قدرتهم على التكيف مع التحديات المختلفة في حياتهم اليومية والمهنية، مما يساهم في تعزيز ثقتهم بأنفسهم وتطوير إمكانياتهم المستقبلية",
+                descriptio1: "تطوير المهارات هو الطريق نحو تحقيق الذات والنجاح",
+                descriptio2:"تنمية المهارات تعزز القدرة على مواجهة تحديات الحياة",
+                descriptio3:"لتفكير الإبداعي والمهارات الحياتية هما أساس التقدم الشخصي",
+                descriptio4: "تطوير القيادة والاتصال الفعّال يبني شخصيات ناجحة",
+                descriptio5: "التدريب على المهارات يعزز من فرص النجاح في الحياة العملية ",
+
+                descripti1:"fas fa-users-cog",
+                descripti2:"fas fa-lightbulb",
+                descripti3:"fas fa-brain",
+                descripti4: "fas fa-user-tie",
+                descripti5: "fas fa-briefcase",
+                doctors: [
+                    { name:"د.ماري سمير نشأت", image:"{{ url_for('static', filename = '1.jpg' ) }}", title: "أخصائية تخاطب وتنمية مهارات وصعوبات تعلم", phone: "01289968982", priceHalf: "200", priceFull: "350", bio: "انتباه وتركيز ", bi: "لوفاس وبروتج", id:"doctor1"},
+                    { name: "أ.مها هشام ", image: "{{ url_for('static', filename = '4.jpeg' ) }}", title: "أخصائي اعاقات", phone: "01008380060", priceHalf: "250", priceFull: "500", bio: "تنمية مهارات", bi:"تعديل سلوك" , id:"doctor4"},
+                    { name: "أ.فيروز حلفاوي", image:"{{ url_for('static', filename = '5.jpeg' ) }}", title: "اخصائي تخاطب وتعديل سلوك وتنمية مهارات", phone: "01282029151-01092057546واتس", priceHalf: "200", priceFull: "300",bio:"تخاطب",bi:"تعديل سلوك", id:"doctor5" },
+                    { name:"أ.محمد شعلان", image:"{{ url_for('static', filename = '12.jpeg' ) }}", title: "أخصائي تعديل سلوك" ,phone:"01221278830-01013666313واتس", priceHalf: "150", priceFull: "250", bio: "", bi: '', id:"doctor12" },
+                    { name:"أ.هدي فتحي", image: "{{ url_for('static', filename = '14.jpeg' ) }}", title: "اخصائية تنمية مهارات وتعديل سلوك ", phone: "01282777145", priceHalf: "200", priceFull: "300", bio: "توحد" ,bi:"تنميه مهارات "  , id:"doctor14"},
+                ]
+                
+            },
+           
+            iq: {
+                title: "قسم مقاييس الذكاء",
+                class:"iq",
+                titleColor: "#8E44AD",
+                description:"يقوم معالجينا المتخصصون في قسم مقاييس الذكاء بتقديم تقييمات شاملة تهدف إلى قياس القدرات العقلية والمعرفية للأفراد. نستخدم مجموعة متنوعة من الأدوات المعتمدة عالميًا لتقييم الذكاء، بما في ذلك اختبارات التفكير المنطقي، والقدرات اللفظية، والقدرات العددية",
+                descriptio1: "اختبارات الذكاء تفتح أبوابًا لفهم القدرات العقلية الحقيقية",
+                descriptio2:"تقييم القدرات يساعد في توجيه التعليم نحو الأفضل ",
+                descriptio3:" الذكاء ليس مجرد رقم، بل هو بوابة لاكتشاف الإمكانيات",
+                descriptio4: "تحليل النتائج يعزز من الفهم العميق للقدرات الفريدة لكل فرد",
+                descriptio5: "التقارير المفصلة تساعد في توجيه الأسر نحو دعم أبنائهم ", 
+
+                descripti1:"fas fa-chart-line",
+                descripti2:"fas fa-chalkboard-teacher",
+                descripti3:"fas fa-lightbulb",
+                descripti4: "fas fa-brain",
+                descripti5: "fas fa-file-alt",
+                doctors: [
+                    { name:"د.ماري سمير نشأت", image:"{{ url_for('static', filename = '1.jpg' ) }}", title: "أخصائية تخاطب وتنمية مهارات وصعوبات تعلم", phone: "01289968982", priceHalf: "200", priceFull: "350",  bio: "ADHD اختبار", bi: "ستنافورد بينيه", id:"doctor1"},
+                    { name: "أ.مها هشام ", image: "{{ url_for('static', filename = '4.jpeg' ) }}", title: "أخصائي اعاقات", phone: "01008380060", priceHalf: "250", priceFull: "500", bio: "تنمية مهارات", bi:"تعديل سلوك" , id:"doctor4"},
+                    { name: "أ.فيروز حلفاوي", image:"{{ url_for('static', filename = '5.jpeg' ) }}", title: "اخصائي تخاطب وتعديل سلوك وتنمية مهارات", phone: "01282029151-01092057546واتس", priceHalf: "200", priceFull: "300",bio:"تخاطب",bi:"تعديل سلوك", id:"doctor5" },
+                    { name:"أ.محمد شعلان", image:"{{ url_for('static', filename = '12.jpeg' ) }}", title: "أخصائي تعديل سلوك" ,phone:"01221278830-01013666313واتس", priceHalf: "150", priceFull: "250", bio: "", bi: "", id:"doctor12" },
+                    { name:"أ.هدي فتحي", image: "{{ url_for('static', filename = '14.jpeg' ) }}", title: "اخصائية تنمية مهارات وتعديل سلوك ", phone: "01282777145", priceHalf: "200", priceFull: "300", bio: "توحد" ,bi:"تنميه مهارات "  , id:"doctor14"},
+                    { name:"أ.اسلام  رمضان", image: "{{ url_for('static', filename = '10.jpeg' ) }}", title: "اخصائي نفسي اكلينكي ومتخصص في الدعم النفسي ", phone: "01228452343-واتس 01112444789", priceHalf: "200", priceFull: "350", bio: "الاكتئاب والرهاب" ,bi: "الوسواس القهري",  id:"doctor10"},
+                ]
+                
+            },
+            work: {
+                title: "قسم الدورات والورش التدريبية",
+                class:"work",
+                titleColor: " #D35400 ",
+                description: "يقوم معالجينا المتخصصون في تقديم دورات وورش تدريبية شاملة تهدف إلى تعزيز المهارات والمعرفة لدى المشاركين في مختلف المجالات. نركز على تقديم محتوى تعليمي يتناسب مع احتياجات الأفراد، من خلال برامج تدريبية تغطي مواضيع مثل الصحة النفسية، والتنمية الذاتية، والتوجيه المهني",
+                descriptio1:"التدريب هو الخطوة الأولى نحو تحقيق التطور الشخصي والمهني",
+                descriptio2:"ورش العمل التفاعلية تعزز من الإبداع والمعرفة",
+                descriptio3:"تطوير مهارات التفكير الإبداعي يعزز من النجاح المستقبلي",
+                descriptio4: "الورش التدريبية تساهم في تحسين المهارات الاجتماعية والمهنية",
+                descriptio5: "الشهادات التدريبية تعزز من الثقة بالنفس وتفتح آفاقًا جديدة",
+
+                descripti1:"fas fa-school",
+                descripti2:"fas fa-chalkboard",
+                descripti3:"fas fa-bolt",
+                descripti4: "fas fa-user-group",
+                descripti5: "fas fa-certificate",
+                doctors: [
+                { name: "د.مريم سمير", image: "{{ url_for('static', filename = '7.jpeg' ) }}", title: "استشاري الصحة النفسية والارشاد الاسري", phone: "01099347308 -واتس 01224588734", priceHalf: "300", priceFull: "500", bio: "اعرف نفسك " ,bi:"اختبارات ومقايس", id:"doctor7"},
+                { name:"أ.اسلام  رمضان", image: "{{ url_for('static', filename = '10.jpeg' ) }}", title: "اخصائي نفسي اكلينكي ومتخصص في الدعم النفسي ", phone: "01228452343-واتس 01112444789", priceHalf: "200", priceFull: "350", bio: "الاكتئاب والرهاب" ,bi: "الوسواس القهري",  id:"doctor10"},
+                { name: "د.دينا نصرالدين", image: "{{ url_for('static', filename = '11.jpeg' ) }}", title: "إستشاري صحة نفسية وإرشارد أسري", phone: "01091087482", priceHalf: "400", priceFull: "600", bio: "صحة نفسية وارشاد اسري" ,bi:"علاج نفسي مراهقين وراشدين" , id:"doctor11" },  
+                ]
+                
+            },
+          
+           
+        };
+
+     
+        const treatment = treatments[treatmentSection];
+        const treatmentContent = document.getElementById('treatment-content');
+
+        if (treatment) {
+    treatmentContent.innerHTML = `
+     <br>
+         <!-- إضافة المربع (Slider) في الصفحة الجديدة -->
+<div class="slid">
+    <div class="slider">
+      <div class="slides">
+        <div class="slide">
+            <p> ${treatment.descriptio1}<br><br><i class="${treatment.descripti1}"></i></p>
+        </div>
+        <div class="slide">
+          <p> ${treatment.descriptio2}<br><br><i class="${treatment.descripti2}"></i></p>
+        </div>
+        <div class="slide">
+           <p> ${treatment.descriptio3}<br><br><i class="${treatment.descripti3}"></i></p>
+        </div>
+        <div class="slide">
+            <p> ${treatment.descriptio4}<br><br><i class="${treatment.descripti4}"></i></p>
+        </div>
+        <div class="slide">
+            <p> ${treatment.descriptio5}<br><br><i class="${treatment.descripti5}"></i></p>
+        </div>
+      </div>
+      <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+      </div>
+    </div>
+  </div>
+    <h1 style="color: ${treatment.titleColor};">${treatment.title}</h1>
+    <p class="description">${treatment.description}</p>
+    <div class="doctor-cards-container">
+        ${treatment.doctors.map(doctor => `
+            <div class="doctor-card">
+                <img src="${doctor.image}" alt="${doctor.name}">
+                <h3>${doctor.name}</h3>
+                <p>${doctor.title}</p>
+                <div class="details-box">
+                    <div class="phone"><i class="fas fa-phone"></i> ${doctor.phone}</div>
+                    <div class="session-prices">
+                        <i class="fas fa-dollar-sign"></i> ${doctor.priceHalf} ج
+                        <i class="fas fa-clock"></i> 30 دقيقة
+                    </div>
+                    <div class="session-prices">
+                        <i class="fas fa-dollar-sign"></i> ${doctor.priceFull} ج
+                        <i class="fas fa-clock"></i> 60 دقيقة
+                    </div>
+                </div>
+                <div class="specialty">متخصص في </div>
+                <div class="more-info-container">
+                    <div class="info-box">${doctor.bi} و </div>
+                    <div class="info-box">${doctor.bio}</div>
+               
+                </div>
+                <a onclick="edirectToDoctorInfo('${doctor.id}')"class="book-button">احجز الآن</a>
+                <a onclick="redirectToDoctorInfo('${doctor.id}')" class="more-info">تفاصيل أكثر</a>   
+            </div>
+           
+        `).join('')}
+    </div>
+    <br> <br>
+    `;
+}
+
+    document.querySelectorAll('.doctor-card img').forEach(image => {
+        image.addEventListener('click', function() {
+            if (this.style.borderRadius === '0%') {
+                this.style.borderRadius = '50%';  // استعادة الصورة الدائرية
+                this.style.width = '120px';  // استعادة الحجم الدائري
+                this.style.height = '120px'; // استعادة الحجم الدائري
+            } else {
+                this.style.borderRadius = '0%';  // إزالة الدائرية لجعل الصورة مربعة
+                this.style.width = '200px';  // تكبير الصورة
+                this.style.height = '200px'; // تكبير الصورة
+            }
+        });
+    });
+    let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+          let i;
+          const slides = document.getElementsByClassName("slide");
+          const dots = document.getElementsByClassName("dot");
+          
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          
+          slideIndex++;
+          if (slideIndex > slides.length) {
+            slideIndex = 1;
+          }
+          
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " active";
+          
+          setTimeout(showSlides, 3000); // تغيير الشريحة كل 4 ثواني
+        }
+        
+        function currentSlide(n) {
+          slideIndex = n;
+          showSlides();
+        }
+    
+    function redirectToDoctorInfo(doctorId) {
+            window.location.href = `doctor-info.html?doctor=${doctorId}`;
+        }
+        function edirectToDoctorInfo(doctorId) {
+            window.location.href = `/book/${doctorId}?week=0`;
+        }
+    </script>
+</body>
+</html>

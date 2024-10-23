@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة مواعيد للطبيب</title>
+</head>
+<body>
+    <h1>إضافة مواعيد للطبيب</h1>
+
+    <form method="POST">
+        <label for="doctor">اختر الطبيب:</label>
+        <select name="doctor_id" id="doctor">
+            {% for doctor in doctors %}
+                <option value="{{ doctor.id }}">{{ doctor.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="day">اختر اليوم:</label>
+        <select name="day" id="day" required>
+            <option value="Monday">الاثنين</option>
+            <option value="Tuesday">الثلاثاء</option>
+            <option value="Wednesday">الأربعاء</option>
+            <option value="Thursday">الخميس</option>
+            <option value="Friday">الجمعة</option>
+            <option value="Saturday">السبت</option>
+            <option value="Sunday">الأحد</option>
+        </select>
+
+        <label for="start_time">وقت البدء:</label>
+        <input type="time" name="start_time" required>
+
+        <label for="end_time">وقت الانتهاء:</label>
+        <input type="time" name="end_time" required>
+
+        <button type="submit">إضافة المواعيد</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap">
+    <title>معالجينا </title>
+    <!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* إعداد الخلفية باللون الأبيض */
+        body {
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            font-family:'Cairo', sans-serif;
+            color: #333;
+            text-align: center;
+        }
+
+        /* تنسيق الناف بار */
+        .navbar {
+              display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color:   #E0E0E0;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(218, 200, 200, 0.1);
+            position: relative;
+            color:  #000000;
+            font-size: 22px;
+       
+        }
+        
+
+        .navbar img {
+            width: 80px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color:  #2C3E50;
+            font-size: 18px;
+            padding: 8px 12px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #FFC107;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        /* تصميم القائمة المنسدلة */
+        .navbar ul li .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #606465;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul li .dropdown a {
+            display: block;
+            padding: 10px 15px;
+            text-align: right;
+            color: #ffffff;
+        }
+
+        .navbar ul li:hover .dropdown {
+            display: block;
+        }
+
+        /* تصميم الهامبرغر */
+        .navbar .menu-button {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* تنسيق النص في منتصف الناف بار */
+        .navbar .center-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .navbar .center-text h1 {
+            margin: 0;
+            font-size: 31px;
+            font-weight: bold;
+            color: #ffc400;
+        }
+
+        /* استعلامات الوسائط لتصميم متجاوب */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .navbar img {
+                width: 70px;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+
+            .navbar .menu-button {
+                display: block;
+            }
+
+            .navbar .center-text {
+                position: static;
+                transform: none;
+                text-align: center;
+            }
+
+            .navbar .center-text h1 {
+                font-size: 26px;
+            }
+
+            .navbar .menu-items.active {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar img {
+                width:65px;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+
+            .navbar .menu-button {
+                display: block;
+            }
+
+            .navbar .center-text {
+                position: static;
+                transform: none;
+                text-align: center;
+            }
+
+            .navbar .center-text h1 {
+                font-size: 30px;
+            }
+
+            .navbar .menu-items.active {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* تنسيق القائمة المنسدلة للشاشات الصغيرة */
+            .menu-items {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                background-color: #FFC107;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 1;
+            }
+
+            .menu-items li {
+                width: 100%;
+                text-align: right;
+            }
+
+            .menu-items li a {
+                display: block;
+                padding: 10px 20px;
+                color: #fff;
+                width: 100%;
+                text-align: right;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .menu-items li a:hover {
+                background-color: #E0F7FA;
+                color: #333;
+            }
+        }
+
+        /* تنسيق العنوان الرئيسي */
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #FFC107;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 18px;     
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* تنسيق الصور والأسماء */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-family:'Cairo', sans-serif;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-item {
+            text-align: center;
+        }
+
+        .gallery img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #FFC107;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .gallery-item h3 {
+            font-size: 14px;
+            color: #333;
+            margin-top: 8px;
+            font-weight: normal;
+            padding: 5px 10px;
+            border: 2px solid #FFC107;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .gallery-item h3:hover {
+            background-color: #FFC107;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .gallery img {
+                width: 140px;
+                height: 140px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery img {
+                width: 105px;
+                height: 105px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+        .arrow-down {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #FFC107;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 20px;
+        left: 98%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        background-color: #011417;
+        color: #FFC107;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s;
+    }
+
+    .arrow-down:hover {
+        background-color: #FFC107;
+        color: #011417;
+    }
+
+    .arrow-down::before {
+        content: '⬇'; /* رمز السهم */
+        font-size: 24px;
+    }
+
+        /* تنسيق القسم الجديد */
+        #steps-section {
+            background-color: #011417;
+            padding: 50px 20px;
+            margin-top: 50px;
+        }
+
+        .step {
+            background-color: #fff;
+            border: 2px solid #FFC107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .step h2 {
+            font-size: 24px;
+            color: #FFC107;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .step p {
+            font-size: 16px;
+            color: #666;
+            text-align: left;
+        }
+
+        /* تنسيق الأيقونات */
+        .step-icon {
+            font-size: 40px;
+            color: #FFC107;
+            margin-right: 20px;
+        }
+
+        /* ضبط تنسيق النصوص مع الأيقونات */
+        .step-content {
+            flex: 1;
+        }
+        #treatment-steps{
+        background-color: #011417;
+        padding: 50px 20px;
+        text-align: center;
+        color: #fff;
+    }
+       /* تنسيق قسم أقسام العلاج */
+    #treatment-sections {
+        background-color: #011417;
+        padding: 50px 20px;
+        text-align: center;
+        color: #fff;
+    }
+
+    #treatment-sections h1 {
+        font-size: 36px;
+        color: #FFC107;
+        margin-bottom: 30px;
+    }
+
+    .section-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .section-item {
+        background-color: #fff;
+        border: 2px solid #FFC107; /* الحواف الصفراء الأساسية */
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        color: #011417;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden; /* لإخفاء الخطوط التي تخرج عن المربع */
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .section-item i {
+        font-size: 48px;
+        color: #FFC107;
+        margin-bottom: 15px;
+    }
+
+    .section-item h2 {
+        font-size: 18px;
+        color: #011417;
+    }
+
+    /* تأثير دوران الخط حول جميع الجوانب */
+    .section-item::before, .section-item::after {
+        content: '';
+        position: absolute;
+        background-color: #000000;
+        transition: all 0.5s ease-in-out;
+    }
+
+    /* خط للحواف العلوية والسفلية */
+    .section-item::before {
+        height: 3px;
+        width: 0;
+        top: 0;
+        left: 0;
+        transition: width 0.4s ease;
+    }
+
+    .section-item::after {
+        height: 3px;
+        width: 0;
+        bottom: 0;
+        right: 0;
+        transition: width 0.4s ease;
+    }
+
+    /* خطوط للحواف اليمنى واليسرى */
+    .section-item .vertical-line::before, .section-item .vertical-line::after {
+        content: '';
+        position: absolute;
+        background-color: #000000;
+        width: 3px;
+        height: 0;
+        transition: height 0.4s ease;
+    }
+
+    .section-item .vertical-line::before {
+        top: 0;
+        left: 0;
+        transition-delay: 0.4s;
+    }
+
+    .section-item .vertical-line::after {
+        bottom: 0;
+        right: 0;
+        transition-delay: 0.4s;
+    }
+
+    /* تأثير التحويم لتحريك الخط حول الحواف الأربعة */
+    .section-item:hover::before {
+        width: 100%; /* يتمدد عبر الحافة العلوية */
+    }
+
+    .section-item:hover::after {
+        width: 100%; /* يتمدد عبر الحافة السفلية */
+    }
+
+    .section-item:hover .vertical-line::before {
+        height: 100%; /* يتمدد عبر الحافة اليسرى */
+    }
+
+    .section-item:hover .vertical-line::after {
+        height: 100%; /* يتمدد عبر الحافة اليمنى */
+    }
+
+    .section-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .section-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .arrow-down { 
+            left: 94%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .arrow-down { 
+            left: 94%;
+        }
+        
+    }
+
+    @media (max-width: 480px) {
+        .section-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .arrow-down { 
+            left: 94%;
+        }
+
+        .section-item i {
+            font-size: 25px;
+        }
+        .section-item h2 {
+        font-size: 14px;
+    }
+
+        
+    }
+
+    @media (max-width: 768px) {
+        .section-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .arrow-down { 
+        left: 94%;
+        bottom: 90px;
+    }
+    }
+    @media (max-width: 480px) {
+        .section-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .arrow-down { 
+        left: 94%;
+    }
+        .section-item i {
+        font-size: 25px;
+    }
+
+    }
+   /* إخفاء العناصر في البداية */
+.section-item {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* عند إضافة الكلاس "visible" يتم إظهار العنصر */
+.section-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* إخفاء الخطوات في البداية */
+.step {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* عند إضافة الكلاس "visible" إلى الخطوة، ستظهر */
+.step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* الكود الخاص بالمربع فقط */
+.slid{
+  display: flex;
+  justify-content: center; /* محاذاة أفقية للمربع */
+  margin: 0; /* إزالة المسافات فوق وتحت */
+  font-family: 'Cairo', sans-serif;
+}
+
+.slider {
+  width:76%;
+  max-width: 420px; /* تصغير العرض */
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color:#ffe30f;
+}
+
+.slides {
+  display: flex;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: 130px; /* تصغير الارتفاع */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px; /* تصغير حجم الخط */
+  font-weight: 700;
+  color: #333;
+}
+
+.dots {
+  text-align: center;
+  margin-top: 15px;
+  background-color: #fffafa;
+}
+
+.dot {
+  height: 10px; /* تصغير حجم النقاط */
+  width: 10px;
+  margin: 0 5px;
+  background-color: #9d9d9d;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot:hover,
+.active {
+  background-color: #fbc02d;
+}
+
+.slider p {
+  margin: 0;
+  font-size: 18px; /* تصغير حجم النص */
+  line-height: 1.4;
+  color: #212121;
+}
+
+.slider i {
+  margin-left: 10px; /* مسافة بين النص والأيقونة */
+  font-size: 40px; /* حجم الأيقونة */
+  color: #ff9800; /* لون الأيقونة */
+}
+.bottom-nav {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    color: #333;
+    text-align: center;
+    padding-bottom: 60px; /* مسافة للقائمة السفلية */
+    
+}
+
+.bottom-nav h1 {
+    color: #ffcc00;
+    font-size: 36px;
+    margin: 20px 0;
+}
+
+.bottom-nav p {
+    color: #666;
+    font-size: 18px;
+}
+
+/* تهيئة القائمة السفلية */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffcc00;
+    color: white;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-top: 3px solid #fff;
+    display: none;
+}
+
+.nav-item {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-item i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-item:hover {
+    background-color: #fff;
+    color: #ffcc00;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+/* إعدادات الهواتف الصغيرة */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+    
+    .nav-item {
+        font-size: 14px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+    }
+    .bottom-nav{
+      display: flex;
+     
+      height: 51px;
+    }
+}
+
+    </style>
+<body>
+    <!-- ناف بار -->
+    <nav class="navbar">
+        <img src={{ url_for('static', filename = '16.png' ) }} alt="صورة 16">
+        <div class="center-text">
+            <h1>IC.H.Y</h1>
+           'I can help you'
+            
+        </div>
+            <ul class="menu-items">
+                <li>
+                    <a href="#">أقسام العلاج</a>
+                    <div class="dropdown">
+                        <a href="treatment.html?section=addiction">قسم علاج الادمان</a>
+                        <a href="treatment.html?section=mentalHealth">قسم الاضطرابات النفسية </a>
+                        <a href="treatment.html?section=family">قسم الأرشاد الاسري والزواجي</a>
+                        <a href="treatment.html?section=sup">قسم الدعم النفسي</a>
+                        <a href="treatment.html?section=difficulties">قسم صعوبات التعلم والتخاطب</a>
+                        <a href="treatment.html?section=Autism">قسم التوحد</a>
+                        <a href="treatment.html?section=development">قسم تنمية  المهارات </a>
+                        <a href="treatment.html?section=iq">قسم مقاييس الذكاء</a>
+                        <a href="treatment.html?section=work">قسم قسم الدورات والورش التدريبية</a>
+                    </div>
+                </li>
+                <li><a href="app.html">تواصل معنا</a></li>
+                <li><a href="#">عن الموقع</a></li>
+                <li><a href="">الصفحة الرئيسية</a></li>
+            </ul>
+        </nav>
+        <div class="bottom-nav">
+            <a href="" class="nav-item">
+                <i class="fas fa-home"></i>
+                الرئيسية
+            </a>
+            <a href="#about" class="nav-item">
+                <i class="fas fa-info-circle"></i>
+                عن الموقع
+            </a>
+            <a href="/#treatment-sections" class="nav-item">
+                <i class="fas fa-stethoscope"></i>
+                أقسام العلاج
+            </a>
+            <a href="app.html" class="nav-item">
+                <i class="fas fa-envelope"></i>
+                تواصل معنا
+            </a>
+        </div>
+    
+        <br>
+       
+  <!-- إضافة المربع (Slider) في الصفحة الجديدة -->
+<div class="slid">
+  <div class="slider">
+    <div class="slides">
+      <div class="slide">
+        <p> الطب النفسي يساعد في تحسين الصحة النفسية والعقلية <br><br><i class="fas fa-brain"></i></p>
+      </div>
+      <div class="slide">
+        <p> الصحة النفسية تؤثر بشكل مباشر على الحياة اليومية والقرارات<br><br><i class="fas fa-lightbulb"></i></p>
+      </div>
+      <div class="slide">
+        <p> طلب المساعدة النفسية ليس ضعفًا بل قوة<br><br><i class="fas fa-hand-holding-heart"></i></p>
+      </div>
+      <div class="slide">
+        <p> الحديث عن المشاكل النفسية يساعد في تخفيف الضغط وتحسين المزاج<br><br><i class="fas fa-microphone"></i></p>
+      </div>
+      <div class="slide">
+        <p> الوعي بالصحة النفسية يمكن أن ينقذ حياة<br><br><i class="fas fa-life-ring"></i></p>
+      </div>
+    </div>
+    <div class="dots">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+      <span class="dot" onclick="currentSlide(5)"></span>
+    </div>
+  </div>
+</div>
+    <h1>معالجينا</h1>
+    <p>نخبة من أفضل معالجي الشرق الأوسط</p>
+    <div class="container">
+        <div class="gallery">
+            <!-- إضافة 15 صورة مع اسم المعالج تحت كل صورة -->
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '1.jpg' ) }}  alt="صورة 1" onclick="redirectToDoctorInfo('doctor1')" >
+                <h3  onclick="redirectToDoctorInfo('doctor1')">د\ماري سمير</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '2.jpeg' ) }}  alt="صورة 2" onclick="redirectToDoctorInfo('doctor2')" >
+                <h3 onclick="redirectToDoctorInfo('doctor2')">د/احمد شرف</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '3.jpeg' ) }} alt="صورة 3"onclick="redirectToDoctorInfo('doctor3')">
+                <h3 onclick="redirectToDoctorInfo('doctor3')">أ/ميسره عبد الفتاح </h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '4.jpeg' ) }} alt="صورة 4"onclick="redirectToDoctorInfo('doctor4')">
+                <h3 onclick="redirectToDoctorInfo('doctor4')">أ/مها هشام احمد</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '5.jpeg' ) }} alt="صورة 5"onclick="redirectToDoctorInfo('doctor5')">
+                <h3 onclick="redirectToDoctorInfo('doctor5')">أ/ فيروز حلفاوي</h3>
+            </div>
+            <div class="gallery-item">
+                <img src= {{ url_for('static', filename = '6.jpeg' ) }} alt="صورة 6"onclick="redirectToDoctorInfo('doctor6')">
+                <h3 onclick="redirectToDoctorInfo('doctor6')">أ/هبه مصطفي فرج</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '7.jpeg' ) }} alt="صورة 7"onclick="redirectToDoctorInfo('doctor7')">
+                <h3 onclick="redirectToDoctorInfo('doctor7')">د/مريم سمير نشأت</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '8.jpeg' ) }} alt="صورة 8"onclick="redirectToDoctorInfo('doctor8')">
+                <h3 onclick="redirectToDoctorInfo('doctor8')">أ/امل ابراهيم شكري</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '9.jpeg' ) }} alt="صورة 9"onclick="redirectToDoctorInfo('doctor9')">
+                <h3 onclick="redirectToDoctorInfo('doctor9')">أ/إسلام صبري </h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '10.jpeg' ) }} alt="صورة 10"onclick="redirectToDoctorInfo('doctor10')">
+                <h3 onclick="redirectToDoctorInfo('doctor10')">أ/اسلام رمضان</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '11.jpeg' ) }} alt="صورة 11"onclick="redirectToDoctorInfo('doctor11')">
+                <h3 onclick="redirectToDoctorInfo('doctor11')">د/دينا نصر الدين</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '12.jpeg' ) }} alt="صورة 12"onclick="redirectToDoctorInfo('doctor12')">
+                <h3 onclick="redirectToDoctorInfo('doctor12')">أ/محمد شعلان</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '13.jpeg' ) }} alt="صورة 13"onclick="redirectToDoctorInfo('doctor13')">
+                <h3 onclick="redirectToDoctorInfo('doctor13')">أ/مرفت رجب</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '14.jpeg' ) }} alt="صورة 14"onclick="redirectToDoctorInfo('doctor14')">
+                <h3 onclick="redirectToDoctorInfo('doctor14')">أ/هدى فتحي</h3>
+            </div>
+            <div class="gallery-item">
+                <img src={{ url_for('static', filename = '15.jpeg' ) }} alt="صورة 15"onclick="redirectToDoctorInfo('doctor15')">
+                <h3 onclick="redirectToDoctorInfo('doctor15')">أ/ريهام عبدالنبي</h3>
+            </div>
+        </div>
+    </div>
+    <div class="arrow-down" onclick="scrollToNextSection()"></div>
+
+    <!-- قسم خطوات بدء العلاج -->
+    <section id="treatment-steps">
+        <h1>خطوات بدء العلاج</h1>
+
+        <!-- الخطوة الأولى -->
+        <div class="step">
+            <i class="fas fa-user-md step-icon"></i> <!-- أيقونة الطبيب -->
+            <div class="step-content">
+                <h2>الخطوة الأولى: اختيار العلاج المناسب</h2>
+                <p>اختر العلاج المناسب لك حسب احتياجاتك وظروفك الصحية. إذا كنت بحاجة إلى تشخيص حالتك، احجز مع أحد معالجي الموقع وسيساعدك على تشخيص حالتك</p>
+            </div>
+        </div>
+
+        <!-- الخطوة الثانية -->
+        <div class="step">
+            <i class="fas fa-calendar-check step-icon"></i> <!-- أيقونة الحجز -->
+            <div class="step-content">
+                <h2>الخطوة الثانية: الحجز مع المعالج</h2>
+                <p>احجز مع المعالج المناسب لك حسب قسم العلاج المناسب عن طريق إدخال بياناتك في زر "احجز الآن" في بطاقة المعالج</p>
+            </div>
+        </div>
+
+        <!-- الخطوة الثالثة -->
+        <div class="step">
+            <i class="fas fa-heartbeat step-icon"></i> <!-- أيقونة المتابعة الصحية -->
+            <div class="step-content">
+                <h2>الخطوة الثالثة: متابعة العلاج</h2>
+                <p>نستمر في متابعة تقدمك طوال فترة العلاج لضمان تحقيق أفضل النتائج</p>
+            </div>
+        </div>
+    </section>
+     <!-- قسم اقسام العلاج-->
+     <section id="treatment-sections">
+        <h1>أقسام العلاج</h1>
+        <div class="section-grid">
+            <!-- قسم علاج الإدمان -->
+            <a href="treatment.html?section=addiction" class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-pills"></i>
+                <h2>قسم علاج الإدمان</h2>
+            </a>
+    
+            <!-- قسم الاضطرابات النفسية -->
+            <a href="treatment.html?section=mentalHealth" class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-brain"></i>
+                <h2>قسم الاضطرابات النفسية</h2>
+            </a>
+
+            <!-- قسم الإرشاد الأسري والزواجي -->
+            <a href="treatment.html?section=family"class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-users"></i>
+                <h2>قسم الإرشاد الأسري والزواجي</h2>
+            </a>
+    
+            <!-- قسم الدعم النفسي -->
+            <a href="treatment.html?section=sup"  class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-hands-helping"></i>
+                <h2>قسم الدعم النفسي</h2>
+            </a>
+    
+            <!-- قسم صعوبات التعلم والتخاطب -->
+            <a href="treatment.html?section=difficulties" class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-child"></i>
+                <h2>قسم صعوبات التعلم والتخاطب</h2>
+            </a>
+    
+            <!-- قسم التوحد -->
+            <a href="treatment.html?section=Autism"class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-puzzle-piece"></i>
+                <h2>قسم التوحد</h2>
+            </a>
+    
+            <!-- قسم تنمية المهارات -->
+            <a href="treatment.html?section=development" class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-lightbulb"></i>
+                <h2>قسم تنمية المهارات</h2>
+            </a>
+    
+            <!-- قسم مقاييس الذكاء -->
+            <a href="treatment.html?section=iq" class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-chart-line"></i>
+                <h2>قسم مقاييس الذكاء</h2>
+            </a>
+    
+            <!-- قسم الدورات والورش التدريبية -->
+            <a href="treatment.html?section=work" class="section-item">
+                <div class="vertical-line"></div>
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h2>قسم الدورات والورش التدريبية</h2>
+            </a>
+        </div>
+    </section>
+
+
+    
+    <script>
+        function redirectToDoctorInfo(doctorId) {
+            window.location.href = `doctor-info.html?doctor=${doctorId}`;
+        }
+        
+        function toggleMenu() {
+            const menuItems = document.querySelector('.menu-items');
+            menuItems.classList.toggle('active');
+        }
+        let step = 1; // لتتبع عدد النقرات
+
+        function scrollToNextSection() {
+    if (step === 1) {
+        const treatmentSteps = document.getElementById('treatment-steps');
+        treatmentSteps.scrollIntoView({ behavior: 'smooth' });
+        step++; // التوجه للخطوة التالية
+    } else if (step === 2) {
+        const treatmentSections = document.getElementById('treatment-sections');
+        treatmentSections.scrollIntoView({ behavior: 'smooth' });
+        step = 1; // العودة إلى الخطوة الأولى
+    }
+    
+}
+    document.addEventListener("DOMContentLoaded", function() {
+        // تحديد جميع العناصر التي تحتوي على الكلاس "section-item"
+        const sectionItems = document.querySelectorAll('.section-item');
+
+        // إعداد المراقب باستخدام IntersectionObserver
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // تأخير يعتمد على ترتيب العنصر
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 300); // 300ms بين كل قسم
+                }
+            });
+        });
+
+        // مراقبة كل عنصر على حدة
+        sectionItems.forEach(item => {
+            observer.observe(item);
+        });
+    });
+  
+    document.addEventListener("DOMContentLoaded", function() {
+        // تحديد جميع الخطوات التي تحتوي على الكلاس "step"
+        const steps = document.querySelectorAll('.step');
+
+        // إعداد المراقب باستخدام IntersectionObserver
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // تأخير يعتمد على ترتيب الخطوة
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 300); // 300ms بين كل خطوة
+                }
+            });
+        }, {
+            threshold: 0.1 // تعديل قيمة العتبة إذا لزم الأمر
+        });
+
+        // مراقبة كل خطوة على حدة
+        steps.forEach(step => {
+            observer.observe(step);
+        });
+    });
+    let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+          let i;
+          const slides = document.getElementsByClassName("slide");
+          const dots = document.getElementsByClassName("dot");
+          
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          
+          slideIndex++;
+          if (slideIndex > slides.length) {
+            slideIndex = 1;
+          }
+          
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " active";
+          
+          setTimeout(showSlides, 2700); // تغيير الشريحة كل 4 ثواني
+        }
+        
+        function currentSlide(n) {
+          slideIndex = n;
+          showSlides();
+        }
+    </script>
+</body>
+</html>
